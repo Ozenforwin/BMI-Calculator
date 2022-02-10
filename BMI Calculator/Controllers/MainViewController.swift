@@ -47,7 +47,9 @@ class MainViewController: UIViewController {
     private let heightSlider: UISlider = {
         let slider = UISlider()
         slider.maximumValue = 3.0
-        
+        slider.minimumTrackTintColor = .white
+        slider.maximumTrackTintColor = .gray
+        slider.addTarget(self, action: #selector(sliderHeightChanged), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -57,14 +59,13 @@ class MainViewController: UIViewController {
         label.text = "Height"
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
-        
         label.translatesAutoresizingMaskIntoConstraints = false
        return label
     }()
     
     private let height: UILabel = {
        let label = UILabel()
-        label.text = "2.0"
+        label.text = "0.0"
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +75,9 @@ class MainViewController: UIViewController {
     private let weightSlider: UISlider = {
        let slider = UISlider()
         slider.maximumValue = 200
-        
+        slider.minimumTrackTintColor = .white
+        slider.maximumTrackTintColor = .gray
+        slider.addTarget(self, action: #selector(sliderWeightChanged), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -92,7 +95,7 @@ class MainViewController: UIViewController {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
-        label.text = "200"
+        label.text = "0.0"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -102,6 +105,16 @@ class MainViewController: UIViewController {
     @objc private func calculateButtonPressed() {
         
         print("test")
+    }
+    
+    @objc private func sliderHeightChanged() {
+        
+        height.text = String(format: "%.2f", heightSlider.value)
+    }
+    
+    @objc private func sliderWeightChanged() {
+        
+        weight.text = String(format: "%.1f", weightSlider.value)
     }
     
     //MARK: - Life Cycles Methods
@@ -124,7 +137,7 @@ class MainViewController: UIViewController {
     
 }
 
-//MARK: - Extensions Set Constraints
+//MARK: - Set Constraints
 
 extension MainViewController {
     
