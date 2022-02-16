@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    //MARK: -
+    //MARK: - UI
     
     // Создаем контанту для нашего фона приложения.
     private let backgroundImage: UIImageView = {
@@ -49,7 +49,8 @@ class MainViewController: UIViewController {
         slider.maximumValue = 3.0
         slider.minimumTrackTintColor = .white
         slider.maximumTrackTintColor = .gray
-        slider.addTarget(self, action: #selector(sliderHeightChanged), for: .valueChanged)
+        slider.value = 1.5
+        slider.addTarget(self, action: #selector(heightSliderChanged), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -63,9 +64,9 @@ class MainViewController: UIViewController {
        return label
     }()
     
-    private let height: UILabel = {
+    private let metreHeightLabel: UILabel = {
        let label = UILabel()
-        label.text = "0.0"
+        label.text = "1.50cm"
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +76,10 @@ class MainViewController: UIViewController {
     private let weightSlider: UISlider = {
        let slider = UISlider()
         slider.maximumValue = 200
+        slider.value = 100
         slider.minimumTrackTintColor = .white
         slider.maximumTrackTintColor = .gray
-        slider.addTarget(self, action: #selector(sliderWeightChanged), for: .valueChanged)
+        slider.addTarget(self, action: #selector(weightSliderChanged), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -91,11 +93,11 @@ class MainViewController: UIViewController {
         return label
     }()
     
-    private let weight: UILabel = {
+    private let kgWeightSlider: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
-        label.text = "0.0"
+        label.text = "100kg"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -104,17 +106,21 @@ class MainViewController: UIViewController {
     
     @objc private func calculateButtonPressed() {
         
-        print("test")
+        
     }
     
-    @objc private func sliderHeightChanged() {
+    @objc private func heightSliderChanged() {
         
-        height.text = String(format: "%.2f", heightSlider.value)
+        let height = String(format: "%.2f", heightSlider.value)
+        metreHeightLabel.text = "\(height)cm"
+        
+        // ИМТ = масса / рост*2
     }
     
-    @objc private func sliderWeightChanged() {
+    @objc private func weightSliderChanged() {
         
-        weight.text = String(format: "%.1f", weightSlider.value)
+        let weight = String(format: "%.0f", weightSlider.value)
+        kgWeightSlider.text = "\(weight)kg"
     }
     
     //MARK: - Life Cycles Methods
@@ -128,9 +134,9 @@ class MainViewController: UIViewController {
         view.addSubview(heightSlider)
         view.addSubview(weightSlider)
         view.addSubview(heightLabel)
-        view.addSubview(height)
+        view.addSubview(metreHeightLabel)
         view.addSubview(weightLabel)
-        view.addSubview(weight)
+        view.addSubview(kgWeightSlider)
         setConstraints()
     }
     
@@ -167,8 +173,8 @@ extension MainViewController {
             heightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 60)
         ])
         NSLayoutConstraint.activate([
-            height.bottomAnchor.constraint(equalTo: heightSlider.bottomAnchor,constant: -35),
-            height.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -60)
+            metreHeightLabel.bottomAnchor.constraint(equalTo: heightSlider.bottomAnchor,constant: -35),
+            metreHeightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -60)
         ])
         NSLayoutConstraint.activate([
             weightSlider.topAnchor.constraint(equalTo: heightSlider.topAnchor,constant: 70),
@@ -180,8 +186,8 @@ extension MainViewController {
             weightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 60)
         ])
         NSLayoutConstraint.activate([
-            weight.topAnchor.constraint(equalTo: weightSlider.topAnchor,constant: -27),
-            weight.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -60)
+            kgWeightSlider.topAnchor.constraint(equalTo: weightSlider.topAnchor,constant: -27),
+            kgWeightSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -60)
         ])
     }
 }
