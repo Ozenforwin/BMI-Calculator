@@ -106,19 +106,20 @@ class MainViewController: UIViewController {
     
     @objc private func calculateButtonPressed() {
         
+        let weight = weightSlider.value
+        let height = heightSlider.value
+        let bmi = weight / (height * height)
         
+        let resultVC = ResultViewController()
+        self.present(resultVC, animated: true, completion: nil)
     }
     
     @objc private func heightSliderChanged() {
-        
         let height = String(format: "%.2f", heightSlider.value)
         metreHeightLabel.text = "\(height)cm"
-        
-        // ИМТ = масса / рост*2
     }
     
     @objc private func weightSliderChanged() {
-        
         let weight = String(format: "%.0f", weightSlider.value)
         kgWeightSlider.text = "\(weight)kg"
     }
