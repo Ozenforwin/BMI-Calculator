@@ -111,6 +111,7 @@ class MainViewController: UIViewController {
         let bmi = weight / (height * height)
         
         let resultVC = ResultViewController()
+        resultVC.bmiValue = String(format: "%.1f",bmi)
         self.present(resultVC, animated: true, completion: nil)
     }
     
