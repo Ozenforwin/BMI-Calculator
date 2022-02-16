@@ -9,9 +9,11 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var bmiValue = "0.0"
+    var bmiValue: String?
+    var advice: String?
+    var color: UIColor?
     
-   lazy var resultLabel: UILabel = {
+    lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 45)
         label.textColor = .white
@@ -25,6 +27,17 @@ class ResultViewController: UIViewController {
         label.font = .boldSystemFont(ofSize: 35)
         label.textColor = .white
         label.text = "YOUR RESULT"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var adviceLabel: UILabel = {
+        let label = UILabel()
+        label.text = advice
+        label.font = .systemFont(ofSize: 25)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,11 +62,13 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(resultLabel)
         view.addSubview(titleLabel)
+        view.addSubview(adviceLabel)
         view.addSubview(recalculateButton)
-//        resultLabel.text = bmiValue
+        view.backgroundColor = color
+        
+        //        resultLabel.text = bmiValue
         
         setConstraints()
-        view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
     }
 }
 // MARK: - SetConstraints
@@ -74,6 +89,11 @@ extension ResultViewController {
             recalculateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -50),
             recalculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             recalculateButton.widthAnchor.constraint(equalToConstant: 300)
+        ])
+        NSLayoutConstraint.activate([
+            adviceLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor,constant: 40),
+            adviceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            adviceLabel.widthAnchor.constraint(equalToConstant: 400)
         ])
         
     }

@@ -11,6 +11,8 @@ class MainViewController: UIViewController {
     
     //MARK: - UI
     
+    var calculatorBrain = CalculatorBrain()
+    
     // Создаем контанту для нашего фона приложения.
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
@@ -108,10 +110,14 @@ class MainViewController: UIViewController {
         
         let weight = weightSlider.value
         let height = heightSlider.value
-        let bmi = weight / (height * height)
+        let bmi = calculatorBrain.calculateBMI(weight: weight, height: height)
         
         let resultVC = ResultViewController()
-        resultVC.bmiValue = String(format: "%.1f",bmi)
+        
+        resultVC.bmiValue = calculatorBrain.getBMIValue()
+        resultVC.advice = calculatorBrain.getAdvice()
+        resultVC.color = calculatorBrain.getColor()
+        
         self.present(resultVC, animated: true, completion: nil)
     }
     
@@ -139,10 +145,9 @@ class MainViewController: UIViewController {
         view.addSubview(metreHeightLabel)
         view.addSubview(weightLabel)
         view.addSubview(kgWeightSlider)
+        
         setConstraints()
     }
-    
-    
 }
 
 //MARK: - Set Constraints
