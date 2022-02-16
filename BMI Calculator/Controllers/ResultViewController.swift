@@ -9,9 +9,9 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    var bmiValue: String = "0.0"
+    var bmiValue = "0.0"
     
-    private let resultLabel: UILabel = {
+   lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 45)
         label.textColor = .white
@@ -29,11 +29,28 @@ class ResultViewController: UIViewController {
         return label
     }()
     
+    private let recalculateButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Recalculate", for: .normal)
+        button.backgroundColor = .white
+        button.titleLabel?.font = .boldSystemFont(ofSize: 25)
+        button.layer.cornerRadius = 10
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(recalculateButtonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func recalculateButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(resultLabel)
         view.addSubview(titleLabel)
-        
+        view.addSubview(recalculateButton)
+//        resultLabel.text = bmiValue
         
         setConstraints()
         view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
@@ -52,6 +69,11 @@ extension ResultViewController {
         NSLayoutConstraint.activate([
             resultLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 40),
             resultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            recalculateButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -50),
+            recalculateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            recalculateButton.widthAnchor.constraint(equalToConstant: 300)
         ])
         
     }
