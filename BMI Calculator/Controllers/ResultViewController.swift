@@ -9,9 +9,14 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
+// MARK: - Variables, Constant
+    
     var bmiValue: String?
     var advice: String?
     var color: UIColor?
+    var image: String?
+    
+// MARK: - UILable, UIImage
     
     lazy var resultLabel: UILabel = {
         let label = UILabel()
@@ -42,6 +47,16 @@ class ResultViewController: UIViewController {
         return label
     }()
     
+    private let adviceImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 20
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+//MARK: - IB Actions
+    
     private let recalculateButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Recalculate", for: .normal)
@@ -58,15 +73,18 @@ class ResultViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+//MARK: - Life Cycles Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(resultLabel)
         view.addSubview(titleLabel)
         view.addSubview(adviceLabel)
+        view.addSubview(adviceImage)
         view.addSubview(recalculateButton)
-        view.backgroundColor = color
         
-        //        resultLabel.text = bmiValue
+        adviceImage.image = UIImage(named: image!)
+        view.backgroundColor = color
         
         setConstraints()
     }
@@ -95,6 +113,11 @@ extension ResultViewController {
             adviceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             adviceLabel.widthAnchor.constraint(equalToConstant: 400)
         ])
-        
+        NSLayoutConstraint.activate([
+            adviceImage.topAnchor.constraint(equalTo: adviceLabel.bottomAnchor,constant: 40),
+            adviceImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            adviceImage.widthAnchor.constraint(equalToConstant: 150),
+            adviceImage.heightAnchor.constraint(equalToConstant: 150)
+        ])
     }
 }

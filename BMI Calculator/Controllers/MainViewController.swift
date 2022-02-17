@@ -13,17 +13,14 @@ class MainViewController: UIViewController {
     
     var calculatorBrain = CalculatorBrain()
     
-    // Создаем контанту для нашего фона приложения.
     private let backgroundImage: UIImageView = {
         let imageView = UIImageView()
-        // Задаем изображение которое будет отображаться
         imageView.image = UIImage(named: "background")
         imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    // Создаем текстовый лейбл
     private let calculateLabel: UILabel = {
         let label = UILabel()
         label.text = "Calculate your BMI"
@@ -40,7 +37,6 @@ class MainViewController: UIViewController {
         button.titleLabel?.font = .boldSystemFont(ofSize: 25)
         button.layer.cornerRadius = 10
         button.backgroundColor = .white
-        //Цвет текста на кнопке
         button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -63,11 +59,11 @@ class MainViewController: UIViewController {
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
     private let metreHeightLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "1.50cm"
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
@@ -76,7 +72,7 @@ class MainViewController: UIViewController {
     }()
     
     private let weightSlider: UISlider = {
-       let slider = UISlider()
+        let slider = UISlider()
         slider.maximumValue = 200
         slider.value = 100
         slider.minimumTrackTintColor = .white
@@ -87,7 +83,7 @@ class MainViewController: UIViewController {
     }()
     
     private let weightLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "Weight"
         label.textColor = .white
         label.font = .systemFont(ofSize: 15)
@@ -96,7 +92,7 @@ class MainViewController: UIViewController {
     }()
     
     private let kgWeightSlider: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .white
         label.text = "100kg"
@@ -110,14 +106,15 @@ class MainViewController: UIViewController {
         
         let weight = weightSlider.value
         let height = heightSlider.value
-        let bmi = calculatorBrain.calculateBMI(weight: weight, height: height)
+        calculatorBrain.calculateBMI(weight: weight, height: height)
         
         let resultVC = ResultViewController()
         
         resultVC.bmiValue = calculatorBrain.getBMIValue()
         resultVC.advice = calculatorBrain.getAdvice()
         resultVC.color = calculatorBrain.getColor()
-        
+        resultVC.image = calculatorBrain.getImage()
+        resultVC.modalTransitionStyle = .flipHorizontal
         self.present(resultVC, animated: true, completion: nil)
     }
     

@@ -41,6 +41,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F178DF5F27BEA55100C2B9DC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1A6900527B3F0710011D419 /* LaunchScreen.storyboard */,
+				F1A6900327B3F0710011D419 /* Assets.xcassets */,
+				F1A6900827B3F0710011D419 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F178DF6027BEA59500C2B9DC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				F1A68FFA27B3F06F0011D419 /* AppDelegate.swift */,
+				F1A68FFC27B3F06F0011D419 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		F1A68FEE27B3F06F0011D419 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +79,11 @@
 		F1A68FF927B3F06F0011D419 /* BMI Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				F178DF6027BEA59500C2B9DC /* Application */,
 				F1A6900E27B3F2240011D419 /* Models */,
 				F1A6900F27B3F22D0011D419 /* Views */,
 				F1A6901027B3F2340011D419 /* Controllers */,
-				F1A68FFC27B3F06F0011D419 /* SceneDelegate.swift */,
-				F1A68FFA27B3F06F0011D419 /* AppDelegate.swift */,
-				F1A6900327B3F0710011D419 /* Assets.xcassets */,
-				F1A6900527B3F0710011D419 /* LaunchScreen.storyboard */,
-				F1A6900827B3F0710011D419 /* Info.plist */,
+				F178DF5F27BEA55100C2B9DC /* Resources */,
 			);
 			path = "BMI Calculator";
 			sourceTree = "<group>";

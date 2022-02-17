@@ -12,5 +12,5 @@ struct BMI {
     let value: Float
     let advice: String
     let color: UIColor
-//    let image: UIImageView
+    let image: String
 }
