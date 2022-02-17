@@ -9,14 +9,14 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-// MARK: - Variables, Constant
+    // MARK: - Variables, Constants
     
     var bmiValue: String?
     var advice: String?
     var color: UIColor?
     var image: String?
     
-// MARK: - UILable, UIImage
+    // MARK: - UILable, UIImage
     
     lazy var resultLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +55,7 @@ class ResultViewController: UIViewController {
         return imageView
     }()
     
-//MARK: - IB Actions
+    // MARK: - IB Actions
     
     private let recalculateButton: UIButton = {
         let button = UIButton(type: .system)
@@ -73,7 +73,7 @@ class ResultViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-//MARK: - Life Cycles Methods
+    // MARK: - Life Cycles Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
